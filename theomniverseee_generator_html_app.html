@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TheOmniverseee Generator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f0f17;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: #181825;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #7c3aed;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      background: #8b5cf6;
+      transform: scale(1.02);
+    }
+
+    .card {
+      background: #222235;
+      border-radius: 16px;
+      padding: 20px;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .title {
+      color: #c084fc;
+      font-size: 1.6rem;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    ul {
+      margin-top: 5px;
+    }
+
+    .rare {
+      color: #facc15;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>TheOmniverseee Generator</h1>
+
+    <button onclick="generateCharacter()">Generate Character</button>
+
+    <div class="card" id="output"></div>
+  </div>
+
+  <script>
+    function pick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function weightedPick(arr) {
+      const total = arr.reduce((sum, item) => sum + item.weight, 0);
+      let rand = Math.random() * total;
+
+      for (const item of arr) {
+        rand -= item.weight;
+        if (rand <= 0) return item.name;
+      }
+
+      return arr[0].name;
+    }
+
+    const bornAs = ["Human", "Alien", "Monster", "Angel", "Demon", "God"];
+
+    const humanTypes = [
+      "Ki User",
+      "Cursed Energy User",
+      "Titan Shifter",
+      "Cybernetic Human",
+      "Swordmaster",
+      "Hunter System User",
+      "Reality Bender"
+    ];
+
+    const alienRaces = [
+      {name:"Saiyan", weight:4},
+      {name:"Viltrumite", weight:3},
+      {name:"Namekian", weight:7},
+      {name:"Kryptonian", weight:2},
+      {name:"Symbiote", weight:6},
+      {name:"Celestial", weight:1}
+    ];
+
+    const powerSystems = [
+      "Ki",
+      "Haki",
+      "Cursed Energy",
+      "Nen",
+      "Mana",
+      "Aura",
+      "Reality Warping",
+      "Time Manipulation"
+    ];
+
+    const cursedTechniques = [
+      {name:"Shrine", weight:3},
+      {name:"Limitless", weight:1},
+      {name:"Ten Shadows", weight:2},
+      {name:"Blood Manipulation", weight:6},
+      {name:"Projection Sorcery", weight:5},
+      {name:"Idle Transfiguration", weight:1}
+    ];
+
+    const ceLevels = [
+      {name:"Average Sorcerer", weight:10},
+      {name:"Grade 1 Level", weight:7},
+      {name:"Special Grade Level", weight:3},
+      {name:"Yuta Level CE", weight:2},
+      {name:"Sukuna Level CE", weight:1},
+      {name:"Infinite CE", weight:0.3}
+    ];
+
+    const weapons = [
+      "Katana",
+      "Spirit Scythe",
+      "Dual Daggers",
+      "Celestial Staff",
+      "Sniper Rifle",
+      "Void Blade",
+      "Reality Breaker",
+      "Gravity Hammer"
+    ];
+
+    const abilities = [
+      "Black Flash",
+      "Regeneration",
+      "Barrier Creation",
+      "Infinite Adaptation",
+      "Teleportation",
+      "Meteor Summon",
+      "Soul Punch",
+      "Fire Manipulation",
+      "Time Stop",
+      "Weapon Summoning",
+      "Domain Expansion",
+      "Cosmic Blast"
+    ];
+
+    const transformations = [
+      {name:"Overdrive Mode", weight:8},
+      {name:"Shadow Form", weight:6},
+      {name:"Dragon Form", weight:5},
+      {name:"God Form", weight:2},
+      {name:"Cosmic Form", weight:1},
+      {name:"Infinite Form", weight:0.2}
+    ];
+
+    const speedLevels = [
+      "Peak Human",
+      "Supersonic",
+      "Hypersonic",
+      "Lightning Speed",
+      "Light Speed",
+      "FTL",
+      "Infinite Speed"
+    ];
+
+    const strengthLevels = [
+      "Street Level",
+      "Building Level",
+      "Mountain Level",
+      "Country Level",
+      "Planetary",
+      "Universal",
+      "Multiversal",
+      "Omniversal"
+    ];
+
+    const durabilityLevels = [
+      "Human Level",
+      "Bulletproof",
+      "Building Tank",
+      "Planetary Durability",
+      "Universal Durability",
+      "Multiversal Durability",
+      "Boundless Durability"
+    ];
+
+    const titles = [
+      "Shadow Monarch",
+      "King of Curses",
+      "The Time King",
+      "God Slayer",
+      "Reality Breaker",
+      "The Infinite Warrior",
+      "The Omniversal God"
+    ];
+
+    function multiRoll(arr, count) {
+      const results = [];
+      for (let i = 0; i < count; i++) {
+        results.push(pick(arr));
+      }
+      return results;
+    }
+
+    function generateCharacter() {
+      const weaponCount = weightedPick([
+        {name:1, weight:10},
+        {name:2, weight:7},
+        {name:3, weight:4},
+        {name:4, weight:2},
+        {name:5, weight:1}
+      ]);
+
+      const abilityCount = weightedPick([
+        {name:1, weight:10},
+        {name:2, weight:7},
+        {name:3, weight:4},
+        {name:4, weight:2},
+        {name:5, weight:1}
+      ]);
+
+      const generatedWeapons = multiRoll(weapons, weaponCount);
+      const generatedAbilities = multiRoll(abilities, abilityCount);
+
+      const character = {
+        born: pick(bornAs),
+        humanType: pick(humanTypes),
+        alien: weightedPick(alienRaces),
+        power: pick(powerSystems),
+        ct: weightedPick(cursedTechniques),
+        ce: weightedPick(ceLevels),
+        transform: weightedPick(transformations),
+        speed: pick(speedLevels),
+        strength: pick(strengthLevels),
+        durability: pick(durabilityLevels),
+        title: pick(titles)
+      };
+
+      document.getElementById("output").innerHTML = `
+        <div class="title">${character.title}</div>
+
+        <b>Born As:</b> ${character.born}<br>
+        <b>Human Type:</b> ${character.humanType}<br>
+        <b>Alien Race:</b> ${character.alien}<br>
+        <b>Power System:</b> ${character.power}<br>
+        <b>Cursed Technique:</b> ${character.ct}<br>
+        <b>CE Amount:</b> ${character.ce}<br><br>
+
+        <b>Weapons (${weaponCount}):</b>
+        <ul>${generatedWeapons.map(w => `<li>${w}</li>`).join("")}</ul>
+
+        <b>Abilities (${abilityCount}):</b>
+        <ul>${generatedAbilities.map(a => `<li>${a}</li>`).join("")}</ul>
+
+        <b>Transformation:</b> ${character.transform}<br>
+        <b>Speed:</b> ${character.speed}<br>
+        <b>Strength:</b> ${character.strength}<br>
+        <b>Durability:</b> ${character.durability}<br>
+      `;
+    }
+
+    generateCharacter();
+  </script>
+</body>
+</html>
